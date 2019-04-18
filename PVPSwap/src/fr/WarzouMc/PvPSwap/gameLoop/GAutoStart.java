@@ -33,7 +33,7 @@ public class GAutoStart extends BukkitRunnable {
         }
 
         if(tick == 20){
-            if(timer == ConfigSetup.getAutoStartTimer() && timer != 30){
+            if(timer == ConfigSetup.getAutoStartTimer()){
                 GameSetup.playSoundGamer(Sound.SUCCESSFUL_HIT);
                 GameSetup.sendTitleGamer("§1Game start in : §f§o" + timer + "s", "§2Good luck");
             }else if(timer == 30 || timer == 20){

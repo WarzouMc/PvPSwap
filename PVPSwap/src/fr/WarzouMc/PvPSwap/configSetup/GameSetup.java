@@ -85,6 +85,12 @@ public class GameSetup {
             player.setLevel(0);
             player.setGameMode(GameMode.SURVIVAL);
         }
+        if(getPlayerList().size()%2 == 1){
+            Player player = Bukkit.getPlayer(getPlayerList().get(getPlayerList().size()-1));
+            player.sendTitle("§4Not enough player", "§6Sorry !");
+            player.setGameMode(GameMode.SPECTATOR);
+            removeInPlayerList(getPlayerList().get(getPlayerList().size()-1));
+        }
     }
 
     /****************
