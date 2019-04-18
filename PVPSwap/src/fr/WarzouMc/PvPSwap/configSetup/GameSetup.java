@@ -103,4 +103,16 @@ public class GameSetup {
         return getAutoStartTimer();
     }
 
+    /**********
+     **Blocks**
+     **********/
+
+    public static List<Integer> getBlock(){
+        return ConfigSetup.getBlock();
+    }
+
+    public static List<Integer> getBlockDrop(int id){
+        return ConfigSetup.getBlockDrop(id);
+    }
+
 }

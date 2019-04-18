@@ -77,4 +77,20 @@ public class ConfigSetup {
         return l;
     }
 
+    /**********
+     **Blocks**
+     **********/
+
+    public static List<Integer> getBlock(){
+        return main.getConfig().getIntegerList("unbreackable");
+    }
+
+    public static List<Integer> getBlockDrop(int id){
+        if(main.getConfig().contains("blockDrop." + id)){
+            return main.getConfig().getIntegerList("blockDrop." + id);
+        }else{
+            return null;
+        }
+    }
+
 }

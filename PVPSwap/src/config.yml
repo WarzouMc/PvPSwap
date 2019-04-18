@@ -21,7 +21,22 @@ pvpLocation:
 - 16
 - 17
 - 18
-unBreackable
+unbreackable:
+- 20
+- 95
+blockDrop:
+  31:
+  - 5
+  - 0
+  - 1
+  175:
+  - 339
+  - 0
+  - 3
+  17:
+  - 5
+  - 0
+  - 4
 
 
 spawn:
