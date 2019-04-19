@@ -33,6 +33,10 @@ public class ConfigSetup {
         return main.getConfig().getInt("startTimer");
     }
 
+    public static int getDuelTimer(){
+        return main.getConfig().getInt("duelTime");
+    }
+
     /************
      **Location**
      ************/

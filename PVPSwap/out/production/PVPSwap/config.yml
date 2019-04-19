@@ -2,6 +2,7 @@ spawnLocation: spawn
 MinPlayer: 4
 MaxPlayer: 18
 startTimer: 30
+duelTime: 300
 pvpLocation:
 - 1
 - 2

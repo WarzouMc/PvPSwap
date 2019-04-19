@@ -1,7 +1,6 @@
 package fr.WarzouMc.PvPSwap.gameLoop;
 
 import fr.WarzouMc.PvPSwap.Main;
-import fr.WarzouMc.PvPSwap.configSetup.ConfigSetup;
 import fr.WarzouMc.PvPSwap.configSetup.GameSetup;
 import fr.WarzouMc.PvPSwap.configSetup.State;
 import org.bukkit.Bukkit;
@@ -23,7 +22,7 @@ public class GAutoStart extends BukkitRunnable {
 
         if(start == 1){
             start--;
-            timer = ConfigSetup.getAutoStartTimer();
+            timer = GameSetup.getAutoStartTime();
         }
 
         if(GameSetup.getPlayerList().size() < GameSetup.getMinPlayer()){
@@ -33,7 +32,7 @@ public class GAutoStart extends BukkitRunnable {
         }
 
         if(tick == 20){
-            if(timer == ConfigSetup.getAutoStartTimer()){
+            if(timer == GameSetup.getAutoStartTime()){
                 GameSetup.playSoundGamer(Sound.SUCCESSFUL_HIT);
                 GameSetup.sendTitleGamer("§1Game start in : §f§o" + timer + "s", "§2Good luck");
             }else if(timer == 30 || timer == 20){
@@ -64,6 +63,8 @@ public class GAutoStart extends BukkitRunnable {
             timer--;
             if(timer == -1){
                 main.setState(State.DUEL);
+                GDuel gDuel = new GDuel(main);
+                gDuel.runTaskTimer(main, 0, 1);
                 cancel();
             }
         }

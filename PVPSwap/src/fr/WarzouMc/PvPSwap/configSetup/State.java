@@ -1,5 +1,5 @@
 package fr.WarzouMc.PvPSwap.configSetup;
 
 public enum State {
-    WAITING, STARTING, DUEL, FINAL, WINING, FINISH
+    WAITING, STARTING, DUEL, SWAPING, FINAL, WINING, FINISH
 }

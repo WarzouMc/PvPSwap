@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static fr.WarzouMc.PvPSwap.configSetup.ConfigSetup.getAutoStartTimer;
+import static fr.WarzouMc.PvPSwap.configSetup.ConfigSetup.getDuelTimer;
+
 public class GameSetup {
 
     /**************
@@ -105,8 +108,12 @@ public class GameSetup {
         return ConfigSetup.getMinPlayer();
     }
 
-    public static int getAutoStartTimer(){
+    public static int getAutoStartTime(){
         return getAutoStartTimer();
+    }
+
+    public static int getDuelTime(){
+        return getDuelTimer();
     }
 
     /**********

@@ -4,6 +4,7 @@ import fr.WarzouMc.PvPSwap.Main;
 import fr.WarzouMc.PvPSwap.configSetup.GameSetup;
 import fr.WarzouMc.PvPSwap.configSetup.State;
 import fr.WarzouMc.PvPSwap.gameLoop.GAutoStart;
+import fr.WarzouMc.PvPSwap.scorboard.ScoreboardCreater;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -13,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -46,7 +46,7 @@ public class PluginManager extends GameSetup implements Listener {
         //Set Player
         setPlayer(player);
 
-        if(main.isState() == State.WAITING){
+        if(main.getState() == State.WAITING || main.getState() == State.STARTING){
             player.setGameMode(GameMode.ADVENTURE);
             addInPlayerList(playerUUID);
             setXP();
@@ -56,11 +56,22 @@ public class PluginManager extends GameSetup implements Listener {
             player.sendTitle("§4The game has already starting", "§6You are spectator !");
         }
 
-        if(getPlayerList().size() >= getMinPlayer() && main.isState() == State.WAITING){
+        if(getPlayerList().size() > getMaxPlayer()){
+            removeInPlayerList(playerUUID);
+            player.setGameMode(GameMode.SPECTATOR);
+            player.setPlayerListName("");
+            setXP();
+        }
+
+        if(getPlayerList().size() >= getMinPlayer() && main.getState() == State.WAITING){
             main.setState(State.STARTING);
             GAutoStart autoStart = new GAutoStart(main);
             autoStart.runTaskTimer(main, 0, 1);
         }
+
+        ScoreboardCreater sc = new ScoreboardCreater(main);
+        sc.Creater(player);
+
     }
 
     /*************
@@ -89,7 +100,7 @@ public class PluginManager extends GameSetup implements Listener {
         String playerName = player.getName();
         UUID playerUUID = player.getUniqueId();
 
-        if(main.isState() != State.WINING && main.isState() != State.FINISH){
+        if(main.getState() != State.WINING && main.getState() != State.FINISH){
             if(!containPlayerInList(playerUUID)){
                 event.setCancelled(true);
             }
@@ -111,7 +122,7 @@ public class PluginManager extends GameSetup implements Listener {
             String playerName = entity.getName();
             UUID playerUUID = entity.getUniqueId();
 
-            if(main.isState() == State.WAITING || main.isState() == State.STARTING || main.isState() == State.WINING || main.isState() == State.FINISH){
+            if(main.getState() == State.WAITING || main.getState() == State.STARTING || main.getState() == State.WINING || main.getState() == State.FINISH){
                 event.setCancelled(true);
             }
 
@@ -132,7 +143,7 @@ public class PluginManager extends GameSetup implements Listener {
         String playerName = player.getName();
         UUID playerUUID = player.getUniqueId();
 
-        if(main.isState() == State.WAITING || main.isState() == State.STARTING || main.isState() == State.WINING || main.isState() == State.FINISH){
+        if(main.getState() == State.WAITING || main.getState() == State.STARTING || main.getState() == State.WINING || main.getState() == State.FINISH){
             event.setCancelled(true);
         }
 
@@ -169,7 +180,7 @@ public class PluginManager extends GameSetup implements Listener {
         String playerName = player.getName();
         UUID playerUUID = player.getUniqueId();
 
-        if(main.isState() == State.WAITING || main.isState() == State.STARTING || main.isState() == State.WINING || main.isState() == State.FINISH){
+        if(main.getState() == State.WAITING || main.getState() == State.STARTING || main.getState() == State.WINING || main.getState() == State.FINISH){
             event.setCancelled(true);
         }
 
@@ -197,7 +208,7 @@ public class PluginManager extends GameSetup implements Listener {
         String playerName = player.getName();
         UUID playerUUID = player.getUniqueId();
 
-        if(main.isState() == State.WAITING || main.isState() == State.STARTING || main.isState() == State.WINING || main.isState() == State.FINISH){
+        if(main.getState() == State.WAITING || main.getState() == State.STARTING || main.getState() == State.WINING || main.getState() == State.FINISH){
             player.setFoodLevel(20);
             player.setHealth(20);
         }

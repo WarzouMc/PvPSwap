@@ -2,6 +2,7 @@ package fr.WarzouMc.PvPSwap;
 
 import fr.WarzouMc.PvPSwap.configSetup.ConfigSetup;
 import fr.WarzouMc.PvPSwap.configSetup.State;
+import fr.WarzouMc.PvPSwap.scorboard.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -32,23 +33,26 @@ public class Main extends JavaPlugin {
         }
 
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "###############################\n" +
-                                                             "                 ##PvPSwap 0.0.3 is now Enable##\n" +
+                                                             "                 ##PvPSwap 0.0.4 is now Enable##\n" +
                                                              "                 ###############################");
 
         Bukkit.getServer().getPluginManager().registerEvents(new PluginManager(this), this);
 
         setState(State.WAITING);
 
+        Updater updater = new Updater(this);
+        updater.runTaskTimer(this, 0, 20);
+
     }
 
     @Override
     public void onDisable() {
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "################################\n" +
-                "                 ##PvPSwap 0.0.3 is now Disable##\n" +
-                "                 ################################");
+                                                           "                 ##PvPSwap 0.0.4 is now Disable##\n" +
+                                                           "                 ################################");
     }
 
-    public State isState() {
+    public State getState() {
         return state;
     }
 
